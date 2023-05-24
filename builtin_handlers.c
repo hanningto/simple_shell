@@ -1,9 +1,9 @@
 #include "header.h"
 
 /**
- * check_builtin - Checks if parsed command in built-in
- * @cmd: Parsed command to be check
- * Return: 0 Succes -1 Fail
+ * check_builtin - Checks parsed command in built-in
+ * @cmd: shows the parsed command to be checked
+ * Return: 0 if success -1 if fail
  */
 int check_builtin(char **cmd)
 {

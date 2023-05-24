@@ -1,10 +1,10 @@
 #include "header.h"
 
 /**
- * change_dir - Changes directory
- * @cmd: Parsed command
- * @st: Status of last command executed
- * Return: 0 on success 1 if failed (For OLDPWD Always 0 incase of no OLDPWD)
+ * change_dir - this function changes the  directory
+ * @cmd:  represents the parsed command
+ * @st: shows the status of last command executed
+ * Return: 0 on success 1 if failed 
  */
 int change_dir(char **cmd, __attribute__((unused))int st)
 {

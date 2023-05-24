@@ -2,8 +2,8 @@
 
 /**
  * parse_cmd - Parses the command recieved from stdin
- * @input: String gathered from stdin
- * Return: Parsed strings to be used as arguments
+ * @input: the string gathered from stdin
+ * Return: Parsed strings 2b used as arguments
  */
 char **parse_cmd(char *input)
 {

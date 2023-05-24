@@ -1,10 +1,10 @@
 #include "header.h"
 
 /**
- * print_error - Displays error message
- * @input: Input recieved from user
- * @counter: Count of shell loop
- * @argv: Arguments before program starts(argv[0] == Shell Program Name)
+ * print_error - shows error message
+ * @input: this is the input recieved from user
+ * @counter: does the counting of shell loop
+ * @argv: Arguments before program starts
  */
 
 void print_error(char *input, int counter, char **argv)
@@ -22,9 +22,9 @@ void print_error(char *input, int counter, char **argv)
 }
 
 /**
- *  _prerror - Prints custom Error
- * @argv: Arguments before program starts(argv[0] == Shell Program Name)
- * @c: Error Count
+ *  _prerror - this is the one that prints the  custom Error
+ * @argv: shows the arguments before program starts(argv[0] == Shell Program Name)
+ * @c: represents the count of error
  * @cmd: Array of parsed command strings
  */
 
@@ -46,7 +46,7 @@ void _prerror(char **argv, int c, char **cmd)
 /**
  * error_file - Prints custom Error
  * @argv: Arguments before program starts(argv[0] == Shell Program Name)
- * @c: Error Count
+ * @c: Erepresents the count of error
  */
 void error_file(char **argv, int c)
 {

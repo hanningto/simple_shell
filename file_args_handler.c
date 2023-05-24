@@ -2,9 +2,9 @@
 
 /**
  * read_file - Reads commands from the argument File
- * @file: File containing commands
+ * @file: this is the file containing commands
  * @argv: Arguments passed
- * Return: -1 or 0
+ * Return: either -1 or 0
  */
 void read_file(char *file, char **argv)
 {
@@ -32,10 +32,10 @@ void read_file(char *file, char **argv)
 
 /**
  * treat_file - Parse commands and handle their execution
- * @line: Line from file
- * @count: Error counter
- * @fp: File descriptor
- * @argv: Command line arguments
+ * @line: line from file
+ * @count: counte error s
+ * @fp: this is the file descriptor
+ * @argv: the command line arguments
  */
 void treat_file(char *line, int count, FILE *fp, char **argv)
 {
@@ -58,7 +58,7 @@ void treat_file(char *line, int count, FILE *fp, char **argv)
 }
 
 /**
- * exit_bul_for_file - Exit status handler for file input
+ * exit_bul_for_file - shows the exit status handler for file input
  * @line: Line from a file
  * @cmd: Parsed command
  * @fd: File Descriptor
