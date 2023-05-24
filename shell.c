@@ -1,50 +1,50 @@
-#include "shell.h"
-/**
-* main - carries out the read, execute then print output loop
-* @ac: argument count
-* @av: argument vector
-* @envp: environment vector
-*
-* Return: 0
-*/
+#include "header.h"
 
-int main(int ac, char **av, char *envp[])
+/**
+ * main - Entry point to program
+ * @argc: Argument count
+ * @argv: Argument vector
+ * Return: Returns condition
+ */
+int main(__attribute__((unused)) int argc, char **argv)
 {
-	char *line = NULL, *pathcommand = NULL, *path = NULL;
-	size_t bufsize = 0;
-	ssize_t linesize = 0;
-	char **command = NULL, **paths = NULL;
-	(void)envp, (void)av;
-	if (ac < 1)
-		return (-1);
-	signal(SIGINT, handle_signal);
-	while (1)
+	char *input, **cmd, **commands;
+	int count = 0, i, condition = 1, stat = 0;
+
+	if (argv[1] != NULL)
+		read_file(argv[1], argv);
+	signal(SIGINT, signal_to_handle);
+	while (condition)
 	{
-		free_buffers(command);
-		free_buffers(paths);
-		free(pathcommand);
-		prompt_user();
-		linesize = getline(&line, &bufsize, stdin);
-		if (linesize < 0)
-			break;
-		info.ln_count++;
-		if (line[linesize - 1] == '\n')
-			line[linesize - 1] = '\0';
-		command = tokenizer(line);
-		if (command == NULL || *command == NULL || **command == '\0')
+		count++;
+		if (isatty(STDIN_FILENO))
+			prompt();
+		input = _getline();
+		if (input[0] == '\0')
 			continue;
-		if (checker(command, line))
-			continue;
-		path = find_path();
-		paths = tokenizer(path);
-		pathcommand = test_path(paths, command[0]);
-		if (!pathcommand)
-			perror(av[0]);
-		else
-			execution(pathcommand, command);
+		history(input);
+		commands = separator(input);
+		for (i = 0; commands[i] != NULL; i++)
+		{
+			cmd = parse_cmd(commands[i]);
+			if (_strcmp(cmd[0], "exit") == 0)
+			{
+				free(commands);
+				exit_bul(cmd, input, argv, count, stat);
+			}
+			else if (check_builtin(cmd) == 0)
+			{
+				stat = handle_builtin(cmd, stat);
+				free(cmd);
+				continue;
+			}
+			else
+				stat = check_cmd(cmd, input, count, argv);
+			free(cmd);
+		}
+		free(input);
+		free(commands);
+		wait(&stat);
 	}
-	if (linesize < 0 && flags.interactive)
-		write(STDERR_FILENO, "\n", 1);
-	free(line);
-	return (0);
+	return (stat);
 }
